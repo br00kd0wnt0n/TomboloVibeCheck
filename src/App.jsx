@@ -120,8 +120,38 @@ export default function App() {
         ))}
       </div>
 
-      {/* Phone Frame */}
-      <div style={styles.phoneFrame}>
+      {/* Phone with Explanation Panels */}
+      <div style={styles.phoneContainer}>
+        {/* Left Explanation */}
+        <div style={{...styles.explanationBox, ...styles.explanationLeft}}>
+          {screen === 'welcome' && (
+            <div style={styles.explanationContent}>
+              <div style={styles.explanationTitle}>Upload your vibe</div>
+              <div style={styles.explanationText}>
+                Snap a pic of your happy place - poolside, beach, rooftop bar, wherever. We'll use it to find your perfect shirt match.
+              </div>
+            </div>
+          )}
+          {screen === 'results' && (
+            <div style={styles.explanationContent}>
+              <div style={styles.explanationTitle}>You've been matched</div>
+              <div style={styles.explanationText}>
+                Based on your photo's energy, we've assigned you a Vibe Tribe and found the shirt that belongs in your life.
+              </div>
+            </div>
+          )}
+          {screen === 'share' && (
+            <div style={styles.explanationContent}>
+              <div style={styles.explanationTitle}>Spread the vibe</div>
+              <div style={styles.explanationText}>
+                Share your match to stories, or join the Family Album so others can see your energy on the product page.
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Phone Frame */}
+        <div style={styles.phoneFrame}>
         <div style={styles.phoneNotch}></div>
         <div style={styles.phoneScreen}>
 
@@ -595,19 +625,42 @@ export default function App() {
         </div>
       </div>
 
-      {/* Legend */}
-      <div style={styles.legend}>
-        <div style={styles.legendTitle}>Prototype Navigation</div>
-        <div style={styles.legendItems}>
-          <div style={styles.legendItem}>
-            <div style={{...styles.legendBox, background: '#FF6B35'}}></div>
-            <span>Active screen</span>
-          </div>
-          <div style={styles.legendItem}>
-            <div style={{...styles.legendBox, border: '1px solid #666'}}></div>
-            <span>Click to navigate</span>
-          </div>
+        {/* Right Explanation */}
+        <div style={{...styles.explanationBox, ...styles.explanationRight}}>
+          {screen === 'analyzing' && (
+            <div style={styles.explanationContent}>
+              <div style={styles.explanationTitle}>Reading your energy</div>
+              <div style={styles.explanationText}>
+                Our AI is analyzing colors, setting, mood, and aesthetic era to find your perfect match.
+              </div>
+            </div>
+          )}
+          {screen === 'customize' && (
+            <div style={styles.explanationContent}>
+              <div style={styles.explanationTitle}>Make it yours</div>
+              <div style={styles.explanationText}>
+                Add personal touches - a tiny lobster, your initials, or a palm tree. We suggest based on your vibe.
+              </div>
+            </div>
+          )}
+          {screen === 'pdp' && (
+            <div style={styles.explanationContent}>
+              <div style={styles.explanationTitle}>The Family Album</div>
+              <div style={styles.explanationText}>
+                See everyone else who was matched to this shirt. Find your Vibe Twins - people with similar energy.
+              </div>
+            </div>
+          )}
         </div>
+      </div>
+
+      {/* Ralph Footer */}
+      <div style={styles.ralphFooter}>
+        <div style={styles.ralphCredit}>Prototype created by</div>
+        <img src="/ralph-logo.png" alt="Ralph" style={styles.ralphLogo} />
+        <a href="mailto:brook@ralph.world" style={styles.ralphEmail}>
+          brook@ralph.world
+        </a>
       </div>
     </div>
   );
@@ -617,6 +670,10 @@ const styles = {
   container: {
     minHeight: '100vh',
     background: '#1E1210',
+    backgroundImage: 'url(/bg-pool.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
     padding: '24px',
     fontFamily: "'DM Sans', -apple-system, sans-serif",
     color: '#fff',
@@ -641,9 +698,13 @@ const styles = {
   screenNav: {
     display: 'flex',
     gap: '8px',
-    marginBottom: '24px',
+    marginBottom: '16px',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    background: 'rgba(0,0,0,0.3)',
+    backdropFilter: 'blur(10px)',
+    padding: '12px 16px',
+    borderRadius: '24px',
   },
   navButton: {
     padding: '6px 12px',
@@ -656,6 +717,38 @@ const styles = {
     letterSpacing: '0.5px',
     transition: 'all 0.2s',
   },
+  phoneContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '24px',
+  },
+  explanationBox: {
+    width: '200px',
+    minHeight: '100px',
+  },
+  explanationLeft: {
+    textAlign: 'right',
+  },
+  explanationRight: {
+    textAlign: 'left',
+  },
+  explanationContent: {
+    background: 'rgba(0,0,0,0.5)',
+    backdropFilter: 'blur(10px)',
+    borderRadius: '12px',
+    padding: '16px',
+  },
+  explanationTitle: {
+    fontSize: '14px',
+    fontWeight: '600',
+    color: '#fff',
+    marginBottom: '8px',
+  },
+  explanationText: {
+    fontSize: '12px',
+    color: 'rgba(255,255,255,0.8)',
+    lineHeight: '1.5',
+  },
   phoneFrame: {
     width: '375px',
     height: '720px',
@@ -664,6 +757,7 @@ const styles = {
     padding: '12px',
     boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
     position: 'relative',
+    flexShrink: 0,
   },
   phoneNotch: {
     width: '120px',
@@ -1473,10 +1567,36 @@ const styles = {
   legend: {
     marginTop: '24px',
     padding: '16px',
-    background: 'rgba(255,255,255,0.05)',
+    background: 'rgba(0,0,0,0.5)',
+    backdropFilter: 'blur(10px)',
     borderRadius: '12px',
     width: '100%',
     maxWidth: '375px',
+  },
+  ralphFooter: {
+    marginTop: '16px',
+    padding: '10px 20px',
+    background: 'rgba(0,0,0,0.5)',
+    backdropFilter: 'blur(10px)',
+    borderRadius: '12px',
+    textAlign: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  },
+  ralphCredit: {
+    fontSize: '11px',
+    color: 'rgba(255,255,255,0.7)',
+  },
+  ralphLogo: {
+    height: '24px',
+    width: 'auto',
+  },
+  ralphEmail: {
+    fontSize: '11px',
+    color: '#E8AA42',
+    textDecoration: 'none',
+    marginLeft: 'auto',
   },
   legendTitle: {
     fontSize: '11px',
