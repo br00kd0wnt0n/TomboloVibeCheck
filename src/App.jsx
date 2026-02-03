@@ -75,12 +75,12 @@ export default function App() {
         setAnalysisProgress(prev => {
           if (prev >= 100) {
             clearInterval(interval);
-            setTimeout(() => setScreen('results'), 500);
+            setTimeout(() => setScreen('results'), 800);
             return 100;
           }
-          return prev + Math.random() * 15;
+          return prev + Math.random() * 8;
         });
-      }, 200);
+      }, 350);
       return () => clearInterval(interval);
     }
   }, [screen]);
